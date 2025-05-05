@@ -2,13 +2,19 @@ import React,{useContext} from 'react'
 import Home from './Home'
 import Register from './Register'
 import Login from './Login'
-import {Link} from 'react-router-dom'
+import {Link,useNavigate} from 'react-router-dom'
 import { AuthContext } from '../contexts/AuthContext';
 
 
 
 function Header() {
+
     const { isLoggedIn, logout } = useContext(AuthContext);
+    const navigate=useNavigate() 
+    function handleLogout(){
+        logout();
+        navigate('/')
+    }
   return (
     <div className="bg-danger text-white py-4">
       <ul className="nav justify-content-end">
@@ -25,7 +31,7 @@ function Header() {
               <Link to="request" className="nav-link text-white">Request Blood</Link>
             </li>
             <li className="nav-item">
-              <button onClick={logout} className="nav-link text-white btn btn-link">Logout</button>
+              <button onClick={handleLogout} className="btn btn-link nav-link text-white">Logout</button>
             </li>
           </>
         ) : (
